@@ -8,49 +8,34 @@ class GildedRose
   def update_quality()
     @items.each do |item|
       next if sulfuras?(item)
-
-
-
-      if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
-        if item.quality > 0
-          if item.sell_in <= 0
-            item.quality -= 2
-            item.quality = 0 if item.quality <=0
-          else
-            item.quality -= 1
-          end
-        end
-
-      else
-        if item.quality < 50
-          item.quality += 1
-          if item.name == "Backstage passes to a TAFKAL80ETC concert"
-            if item.sell_in < 11
-              item.quality += 1 if item.quality < 50
-            end
-            if item.sell_in < 6
-              item.quality += 1 if item.quality < 50
-            end
-          end
-        end
-      end
-
-      if item.sell_in <= 0
-        if item.name != "Aged Brie"
-          if item.name == "Backstage passes to a TAFKAL80ETC concert"
-            item.quality = 0
-          end
-
-        else
-          item.quality += 1 if item.quality < 50
-        end
-
-      end
       end_day(item)
+
+      if aged_brie?(item)
+        # adjust_brie_quality(item)
+        increase_quality(item)
+        increase_quality(item) if past_sell_in?(item)
+        next
+      end
+
+      if backstage?(item)
+        increase_quality(item)
+        if item.sell_in < 10
+          increase_quality(item)
+        end
+        if item.sell_in < 5
+          increase_quality(item)
+        end
+        if past_sell_in?(item)
+          item.quality = 0
+        end
+        next
+      end
+
+      if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert" # normal item
+        decrease_quality(item)
+        decrease_quality(item) if past_sell_in?(item)
+      end
     end
-
-
-
   end
 
   private
@@ -59,9 +44,34 @@ class GildedRose
     item.name == "Sulfuras, Hand of Ragnaros"
   end
 
+  def aged_brie?(item)
+    item.name == "Aged Brie"
+  end
+
+  def backstage?(item)
+    item.name == "Backstage passes to a TAFKAL80ETC concert"
+  end
+
   def end_day(item)
     item.sell_in -= 1
   end
+
+  def increase_quality(item)
+    item.quality += 1 if item.quality < 50
+  end
+
+  def decrease_quality(item)
+    item.quality -= 1 if item.quality > 0
+  end
+
+  def past_sell_in?(item)
+    item.sell_in < 0
+  end
+
+  # def adjust_brie_quality(item)
+  #   increase_quality(item)
+  #   increase_quality(item) if past_sell_in?(item)
+  # end
 end
 
 class Item

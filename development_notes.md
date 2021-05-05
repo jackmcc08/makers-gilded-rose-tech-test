@@ -54,3 +54,6 @@ Proposed Tests:
 
 - Quality
   - Can never be above 50
+
+
+Added in all tests for basic functionality of items

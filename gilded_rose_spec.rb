@@ -1,15 +1,25 @@
 require File.join(File.dirname(__FILE__), 'gilded_rose')
 
 describe GildedRose do
+  class ItemDouble
+    attr_accessor :name, :sell_in, :quality
+
+    def initialize(name, sell_in, quality)
+      @name = name
+      @sell_in = sell_in
+      @quality = quality
+    end
+  end
+
   before do
     test_items = [
-      Item.new("foo", 0, 0),
-      Item.new("Sake", 10, 20),
-      Item.new("Normal Item", 1, 10),
-      Item.new("Aged Brie", 10, 20),
-      Item.new("Sulfuras, Hand of Ragnaros", 0, 50),
-      Item.new("Backstage passes to a TAFKAL80ETC concert", 11, 20),
-      Item.new("Backstage passes to a TAFKAL80ETC concert", 11, 50)
+      ItemDouble.new("foo", 0, 0),
+      ItemDouble.new("Sake", 10, 20),
+      ItemDouble.new("Normal Item", 1, 10),
+      ItemDouble.new("Aged Brie", 10, 20),
+      ItemDouble.new("Sulfuras, Hand of Ragnaros", 0, 50),
+      ItemDouble.new("Backstage passes to a TAFKAL80ETC concert", 11, 20),
+      ItemDouble.new("Backstage passes to a TAFKAL80ETC concert", 11, 50)
     ]
     @test_rose = GildedRose.new(test_items)
   end

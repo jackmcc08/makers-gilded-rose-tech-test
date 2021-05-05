@@ -9,6 +9,8 @@ class GildedRose
     @items.each do |item|
       next if sulfuras?(item)
 
+
+
       if item.name != "Aged Brie" and item.name != "Backstage passes to a TAFKAL80ETC concert"
         if item.quality > 0
           item.quality -= 1
@@ -27,9 +29,9 @@ class GildedRose
         end
       end
 
-      item.sell_in -= 1
 
-      if item.sell_in < 0
+
+      if item.sell_in <= 0
         if item.name != "Aged Brie"
           if item.name != "Backstage passes to a TAFKAL80ETC concert"
             if item.quality > 0
@@ -42,13 +44,21 @@ class GildedRose
           item.quality += 1 if item.quality < 50
         end
       end
+      end_day(item)
     end
+
+
+
   end
 
   private
 
   def sulfuras?(item)
     item.name == "Sulfuras, Hand of Ragnaros"
+  end
+
+  def end_day(item)
+    item.sell_in -= 1
   end
 end
 

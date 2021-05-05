@@ -2,7 +2,7 @@ require File.join(File.dirname(__FILE__), 'gilded_rose')
 
 describe GildedRose do
   before do
-    TEST_ITEMS = [
+    test_items = [
       Item.new("foo", 0, 0),
       Item.new("Sake", 10, 20),
       Item.new("Normal Item", 1, 10),
@@ -10,7 +10,7 @@ describe GildedRose do
       Item.new("Sulfuras, Hand of Ragnaros", 0, 50),
       Item.new("Backstage passes to a TAFKAL80ETC concert", 15, 20)
     ]
-    @test_rose = GildedRose.new(TEST_ITEMS)
+    @test_rose = GildedRose.new(test_items)
   end
 
 
@@ -27,6 +27,11 @@ describe GildedRose do
       it "at end of each day, quality decreases by 2 if sell_in value is < 0" do
         @test_rose.update_quality()
         expect {@test_rose.update_quality()}.to change { @test_rose.items[2].quality }.by(-2)
+      end
+
+      it "quality never decreases below zero" do
+        6.times { @test_rose.update_quality() }
+        expect {@test_rose.update_quality()}.to change { @test_rose.items[2].quality }.by(0)
       end
     end
   end

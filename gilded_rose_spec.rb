@@ -56,12 +56,20 @@ describe GildedRose do
 
     context "for Aged Brie" do
       it "at end of each day, quality increases by 1" do
-        expect { @test_rose.update_quality() }.to change { @test_rose.items[3].quality }.by(1)
+        expect { @test_rose.update_quality }.to change { @test_rose.items[3].quality }.by(1)
         expect(@test_rose.items[3].quality).to eq 21
       end
 
+      it "at end of each day, quality increase by 2 if sell_in is less than 0" do
+        10.times { @test_rose.update_quality }
+        expect(@test_rose.items[3].quality).to eq 30
+        expect { @test_rose.update_quality }.to change { @test_rose.items[3].quality }.by(2)
+        expect(@test_rose.items[3].quality).to eq 32
+
+      end
+
       it 'quality never increases above 50' do
-        30.times { @test_rose.update_quality() }
+        20.times { @test_rose.update_quality() }
         expect(@test_rose.items[3].quality).to eq 50
         expect { @test_rose.update_quality() }.to change { @test_rose.items[3].quality }.by(0)
         expect(@test_rose.items[3].quality).to eq 50

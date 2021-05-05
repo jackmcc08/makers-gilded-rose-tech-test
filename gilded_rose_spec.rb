@@ -130,7 +130,6 @@ describe GildedRose do
       end
     end
   end
-
 end
 
 # Item.new(name, sell_in, quality)

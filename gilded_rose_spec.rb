@@ -21,21 +21,32 @@ describe GildedRose do
 
     context "for a normal item" do
       it "at end of each day, quality decreases by 1 if sell_in value is >= 0" do
-        expect {@test_rose.update_quality()}.to change { @test_rose.items[2].quality }.by(-1)
+        expect { @test_rose.update_quality() }.to change { @test_rose.items[2].quality }.by(-1)
       end
 
       it "at end of each day, quality decreases by 2 if sell_in value is < 0" do
         @test_rose.update_quality()
-        expect {@test_rose.update_quality()}.to change { @test_rose.items[2].quality }.by(-2)
+        expect { @test_rose.update_quality() }.to change { @test_rose.items[2].quality }.by(-2)
       end
 
       it "quality never decreases below zero" do
         6.times { @test_rose.update_quality() }
-        expect {@test_rose.update_quality()}.to change { @test_rose.items[2].quality }.by(0)
+        expect { @test_rose.update_quality() }.to change { @test_rose.items[2].quality }.by(0)
       end
 
       it "at end of each day, sell_in decreases by 1" do
-        expect {@test_rose.update_quality()}.to change { @test_rose.items[2].sell_in }.by(-1)
+        expect { @test_rose.update_quality() }.to change { @test_rose.items[2].sell_in }.by(-1)
+      end
+    end
+
+    context "for Aged Brie" do
+      it "at end of each day, quality increases by 1" do
+        expect { @test_rose.update_quality() }.to change { @test_rose.items[3].quality }.by(1)
+      end
+
+      it 'quality never increases above 50' do
+        30.times { @test_rose.update_quality() }
+        expect { @test_rose.update_quality() }.to change { @test_rose.items[3].quality }.by(0)
       end
     end
   end

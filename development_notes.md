@@ -34,3 +34,23 @@ Therefore my plan is as follows:
 - Implement new feature
 
 Eventually may add in rubocop and standard rspec folders to organise files. I may seperate out the Item Class as well once I have added the initial tests.
+
+Proposed Tests:
+- Normal Items:
+  - Quality decreases by 1 each day
+  - Quality decreased by 2 once Sell_in is below 0
+  - Quality is never negative
+  - SellIn decreases by 1 each day
+- Aged Brie
+  - Quality increases by 1 each day
+- Sulfuras
+  - Sell_in never changes
+  - Quality never changes
+- Backstage Passes
+  - Quality increases by 1 each day
+  - Quality increases by 2 each day where sellin is between 10-6
+  - Quality increases by 1 each day where sellin is between 5-0
+  - QUality drops to 0 when sellin < 0
+
+- Quality
+  - Can never be above 50

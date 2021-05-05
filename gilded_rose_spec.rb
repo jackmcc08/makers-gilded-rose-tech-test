@@ -33,6 +33,10 @@ describe GildedRose do
         6.times { @test_rose.update_quality() }
         expect {@test_rose.update_quality()}.to change { @test_rose.items[2].quality }.by(0)
       end
+
+      it "at end of each day, sell_in decreases by 1" do
+        expect {@test_rose.update_quality()}.to change { @test_rose.items[2].sell_in }.by(-1)
+      end
     end
   end
 

@@ -49,6 +49,16 @@ describe GildedRose do
         expect { @test_rose.update_quality() }.to change { @test_rose.items[3].quality }.by(0)
       end
     end
+
+    context 'for Sulfuras' do
+      it "at end of each day, quality does not change" do
+        expect { @test_rose.update_quality() }.not_to change { @test_rose.items[4].quality }
+      end
+
+      it "at end of each day, sell_in valude does not change" do
+        expect { @test_rose.update_quality() }.not_to change { @test_rose.items[4].sell_in }
+      end
+    end
   end
 
 end

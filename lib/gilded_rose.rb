@@ -20,6 +20,8 @@ class GildedRose
       if conjured?(item)
         decrease_one_quality(item)
         decrease_one_quality(item)
+        decrease_one_quality(item) if past_sell_in?(item)
+        decrease_one_quality(item) if past_sell_in?(item)
         next
       end
 

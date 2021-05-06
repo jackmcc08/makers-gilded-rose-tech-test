@@ -2,6 +2,8 @@
 
 ## Makers Academy, Week 10, Tech Test Practice - Gilded Rose Tech Test
 
+[Test Instructions](https://github.com/makersacademy/course/blob/master/individual_challenges/gilded_rose.md)
+
 ## To Use
 - git clone the repo to your machine
 - run in command line: `bundle install`
@@ -21,7 +23,7 @@ Methods you can use with `INN` :
 
 Create your own Inn:
 - You can create your own inn with `inn_name = GildedRose.new(items_array)`.
-- You will need to create the inn with an array of items, build up an array with instances of the Item Class before creating your own inn- `Item.new(name (string), sell_in (integer), quality (integer))`
+- You will need to create the inn with an array of items, build up an array with instances of the Item Class **before creating your own inn**- `Item.new(name (string), sell_in (integer), quality (integer))`
   - An example of an item array:
     ` items_array = [
       Item.new('foo', 0, 0),
@@ -46,7 +48,7 @@ I then refactored the code to improve readability and pull out specific methods 
 
 I also refactored in small chunks with lots of commits to ensure I could roll back on commits when necessary.
 
-Finally once the code was refactored to my satisfaction, i developed unit tests for the new feature and TDD'd the new feature into existince.
+Finally once the code was refactored to my satisfaction, I developed unit tests for the new feature (conjured items) and TDD'd the new feature into existince.
 
 I also added in attr_reader feature for the items, to be able to easily see what items where availabel in the shop and improve test readability.
 

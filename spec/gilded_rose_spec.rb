@@ -159,11 +159,11 @@ describe GildedRose do
         expect { @test_rose.update_quality() }.to change { @test_rose.items[7].quality }.by(0)
         expect(@test_rose.items[7].quality).to eq 0
       end
-      #
-      # it "at end of each day, sell_in decreases by 1" do
-      #   expect { @test_rose.update_quality() }.to change { @test_rose.items[2].sell_in }.by(-1)
-      #   expect(@test_rose.items[2].sell_in).to eq 0
-      # end
+
+      it "at end of each day, sell_in decreases by 1" do
+        expect { @test_rose.update_quality() }.to change { @test_rose.items[7].sell_in }.by(-1)
+        expect(@test_rose.items[7].sell_in).to eq 14
+      end
     end
   end
 end

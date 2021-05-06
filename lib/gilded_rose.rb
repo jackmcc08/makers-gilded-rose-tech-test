@@ -8,29 +8,19 @@ class GildedRose
   end
 
   def update_quality
-    @items.each do |item|
-      next if sulfuras?(item)
-
+    @items.each { |item|
       end_day(item)
 
-      next adjust_brie_quality(item) if aged_brie?(item)
-
-      next adjust_backstage_quality(item) if backstage?(item)
-
-      next adjust_conjured_quality(item) if conjured?(item)
+      next adjust_uncommon_item_quality(item) if uncommon_item?(item)
 
       adjust_normal_item_quality(item)
-    end
+    }
   end
 
   private
 
-  def sulfuras?(item)
-    item.name == "Sulfuras, Hand of Ragnaros"
-  end
-
   def end_day(item)
-    item.sell_in -= 1
+    item.sell_in -= 1 unless sulfuras?(item)
   end
 
   def increase_one_quality(item)
@@ -47,6 +37,25 @@ class GildedRose
 
   def past_sell_in?(item)
     item.sell_in.negative?
+  end
+
+  def uncommon_item?(item)
+    return true if sulfuras?(item)
+    return true if aged_brie?(item)
+    return true if backstage?(item)
+    return true if conjured?(item)
+
+    false
+  end
+
+  def adjust_uncommon_item_quality(item)
+    adjust_brie_quality(item) if aged_brie?(item)
+    adjust_backstage_quality(item) if backstage?(item)
+    adjust_conjured_quality(item) if conjured?(item)
+  end
+
+  def sulfuras?(item)
+    item.name == "Sulfuras, Hand of Ragnaros"
   end
 
   def aged_brie?(item)
@@ -75,8 +84,8 @@ class GildedRose
 
   def adjust_conjured_quality(item)
     2.times {
-    decrease_one_quality(item)
-    decrease_one_quality(item) if past_sell_in?(item)
+      decrease_one_quality(item)
+      decrease_one_quality(item) if past_sell_in?(item)
     }
   end
 

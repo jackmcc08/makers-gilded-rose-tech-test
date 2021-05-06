@@ -52,6 +52,10 @@ Finally once the code was refactored to my satisfaction, I developed unit tests 
 
 I also added in attr_reader feature for the items, to be able to easily see what items where availabel in the shop and improve test readability.
 
+At the time of submission:
+- no rubocop error - except GildedRose class over 30 lines.
+- all tests passed and 100% coverage
+
 ## Code Structure & Dependencies
 - Built with Ruby Version: 3.0.1
 

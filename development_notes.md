@@ -57,3 +57,10 @@ Proposed Tests:
 
 
 Added in all tests for basic functionality of items
+
+
+Add a feature test  - done
+
+Build out instructions - built out irb instructions that load when you run it in irb.
+
+Complete README

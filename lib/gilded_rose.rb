@@ -17,13 +17,7 @@ class GildedRose
 
       next adjust_backstage_quality(item) if backstage?(item)
 
-      if conjured?(item)
-        decrease_one_quality(item)
-        decrease_one_quality(item)
-        decrease_one_quality(item) if past_sell_in?(item)
-        decrease_one_quality(item) if past_sell_in?(item)
-        next
-      end
+      next adjust_conjured_quality(item) if conjured?(item)
 
       adjust_normal_item_quality(item)
     end
@@ -77,6 +71,13 @@ class GildedRose
 
   def conjured?(item)
     item.name == "Conjured Hand of Darkness"
+  end
+
+  def adjust_conjured_quality(item)
+    2.times {
+    decrease_one_quality(item)
+    decrease_one_quality(item) if past_sell_in?(item)
+    }
   end
 
   def adjust_normal_item_quality(item)

@@ -19,7 +19,8 @@ describe GildedRose do
       ItemDouble.new("Aged Brie", 10, 20),
       ItemDouble.new("Sulfuras, Hand of Ragnaros", 0, 50),
       ItemDouble.new("Backstage passes to a TAFKAL80ETC concert", 11, 20),
-      ItemDouble.new("Backstage passes to a TAFKAL80ETC concert", 11, 50)
+      ItemDouble.new("Backstage passes to a TAFKAL80ETC concert", 11, 50),
+      ItemDouble.new("Conjured Hand of Darkness", 15, 40)
     ]
     @test_rose = GildedRose.new(test_items)
   end
@@ -137,7 +138,29 @@ describe GildedRose do
       end
     end
 
-    # context ''
+    context 'for conjured items - which degrade twice as fast as normal Items' do
+      it "at end of each day, quality decreases by 2 if sell_in value is >= 0" do
+        expect { @test_rose.update_quality() }.to change { @test_rose.items[7].quality }.by(-2)
+        expect(@test_rose.items[7].quality).to eq 38
+      end
+
+      # it "at end of each day, quality decreases by 4 if sell_in value is < 0" do
+      #   @test_rose.update_quality()
+      #   expect { @test_rose.update_quality() }.to change { @test_rose.items[2].quality }.by(-2)
+      #   expect(@test_rose.items[2].quality).to eq 7
+      # end
+      #
+      # it "quality never decreases below zero" do
+      #   6.times { @test_rose.update_quality() }
+      #   expect { @test_rose.update_quality() }.to change { @test_rose.items[2].quality }.by(0)
+      #   expect(@test_rose.items[2].quality).to eq 0
+      # end
+      #
+      # it "at end of each day, sell_in decreases by 1" do
+      #   expect { @test_rose.update_quality() }.to change { @test_rose.items[2].sell_in }.by(-1)
+      #   expect(@test_rose.items[2].sell_in).to eq 0
+      # end
+    end
   end
 end
 

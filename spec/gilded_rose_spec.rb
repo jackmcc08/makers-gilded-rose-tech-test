@@ -1,16 +1,16 @@
-require File.join(File.dirname(__FILE__), 'gilded_rose')
+require 'gilded_rose'
+
+class ItemDouble
+  attr_accessor :name, :sell_in, :quality
+
+  def initialize(name, sell_in, quality)
+    @name = name
+    @sell_in = sell_in
+    @quality = quality
+  end
+end
 
 describe GildedRose do
-  class ItemDouble
-    attr_accessor :name, :sell_in, :quality
-
-    def initialize(name, sell_in, quality)
-      @name = name
-      @sell_in = sell_in
-      @quality = quality
-    end
-  end
-
   before do
     test_items = [
       ItemDouble.new("foo", 0, 0),
@@ -23,7 +23,6 @@ describe GildedRose do
     ]
     @test_rose = GildedRose.new(test_items)
   end
-
 
   describe "#update_quality" do
     it "does not change the name of the item" do
@@ -79,13 +78,13 @@ describe GildedRose do
     context 'for Sulfuras' do
       it "at end of each day, quality does not change" do
         expect(@test_rose.items[4].quality).to eq 50
-        expect { @test_rose.update_quality() }.not_to change { @test_rose.items[4].quality }
+        expect { @test_rose.update_quality() }.not_to change(@test_rose.items[4], :quality)
         expect(@test_rose.items[4].quality).to eq 50
       end
 
       it "at end of each day, sell_in valude does not change" do
         expect(@test_rose.items[4].sell_in).to eq 0
-        expect { @test_rose.update_quality() }.not_to change { @test_rose.items[4].sell_in }
+        expect { @test_rose.update_quality() }.not_to change(@test_rose.items[4], :sell_in)
         expect(@test_rose.items[4].sell_in).to eq 0
       end
     end
@@ -137,6 +136,8 @@ describe GildedRose do
         expect(@test_rose.items[6].quality).to eq 50
       end
     end
+
+    # context ''
   end
 end
 

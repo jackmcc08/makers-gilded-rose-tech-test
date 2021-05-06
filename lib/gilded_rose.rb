@@ -1,3 +1,5 @@
+require_relative 'item'
+
 class GildedRose
   attr_reader :items
 
@@ -5,7 +7,7 @@ class GildedRose
     @items = items
   end
 
-  def update_quality()
+  def update_quality
     @items.each do |item|
       next if sulfuras?(item)
 
@@ -34,7 +36,7 @@ class GildedRose
   end
 
   def decrease_one_quality(item)
-    item.quality -= 1 if item.quality > 0
+    item.quality -= 1 if item.quality.positive?
   end
 
   def zero_quality(item)
@@ -42,7 +44,7 @@ class GildedRose
   end
 
   def past_sell_in?(item)
-    item.sell_in < 0
+    item.sell_in.negative?
   end
 
   def aged_brie?(item)
@@ -68,19 +70,5 @@ class GildedRose
   def adjust_normal_item_quality(item)
     decrease_one_quality(item)
     decrease_one_quality(item) if past_sell_in?(item)
-  end
-end
-
-class Item
-  attr_accessor :name, :sell_in, :quality
-
-  def initialize(name, sell_in, quality)
-    @name = name
-    @sell_in = sell_in
-    @quality = quality
-  end
-
-  def to_s()
-    "#{@name}, #{@sell_in}, #{@quality}"
   end
 end

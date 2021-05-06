@@ -150,12 +150,15 @@ describe GildedRose do
         expect { @test_rose.update_quality() }.to change { @test_rose.items[7].quality }.by(-4)
         expect(@test_rose.items[7].quality).to eq 6
       end
-      #
-      # it "quality never decreases below zero" do
-      #   6.times { @test_rose.update_quality() }
-      #   expect { @test_rose.update_quality() }.to change { @test_rose.items[2].quality }.by(0)
-      #   expect(@test_rose.items[2].quality).to eq 0
-      # end
+
+      it "quality never decreases below zero" do
+        17.times { @test_rose.update_quality() }
+        expect(@test_rose.items[7].quality).to eq 2
+        expect { @test_rose.update_quality() }.to change { @test_rose.items[7].quality }.by(-2)
+        expect(@test_rose.items[7].quality).to eq 0
+        expect { @test_rose.update_quality() }.to change { @test_rose.items[7].quality }.by(0)
+        expect(@test_rose.items[7].quality).to eq 0
+      end
       #
       # it "at end of each day, sell_in decreases by 1" do
       #   expect { @test_rose.update_quality() }.to change { @test_rose.items[2].sell_in }.by(-1)

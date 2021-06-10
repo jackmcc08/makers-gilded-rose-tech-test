@@ -1,4 +1,4 @@
-# makers-gilded-rose-tech-test
+# Gilded Rose Tech Test
 
 ## Makers Academy, Week 10, Tech Test Practice - Gilded Rose Tech Test
 

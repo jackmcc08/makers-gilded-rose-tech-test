@@ -2,7 +2,26 @@
 
 ## Makers Academy, Week 10, Tech Test Practice - Gilded Rose Tech Test
 
-[Test Instructions](https://github.com/makersacademy/course/blob/master/individual_challenges/gilded_rose.md)
+[Original Test Instructions](https://github.com/makersacademy/course/blob/master/individual_challenges/gilded_rose.md)
+
+## Solution
+This is my attempt at a classic tech test - the Gilded Rose. 
+
+The exercise was to refactor an existing code base to implement a new feature, from existing Spaghetti Code.
+
+The existing code had no tests, so I developed a full suite of unit tests to confirm the working of the original code against the specification before I changed any code.
+
+I then refactored the code to improve readability and pull out specific methods into private methods, to ensure each method was a) SRP and b) DRY. I used the tests to ensure the code continued to work as expected.
+
+I also refactored in small chunks with lots of commits to ensure I could roll back on commits when necessary.
+
+Finally once the code was refactored to my satisfaction, I developed unit tests for the new feature (conjured items) and TDD'd the new feature into existince.
+
+I also added in attr_reader feature for the items, to be able to easily see what items where availabel in the shop and improve test readability.
+
+At the time of submission:
+- no rubocop error - except GildedRose class over 30 lines.
+- all tests passed and 100% coverage
 
 ## To Use
 - git clone the repo to your machine
@@ -38,23 +57,6 @@ Create your own Inn:
     `
 
 ![screenshot](./IRB_demo_new_inn.png)
-
-## Solution
-This exercise was to refactor an existing code base to implement a new feature.
-
-The existing code had no tests, so I developed a full suite of unit tests to confirm the working of the original code against the specification before I changed any code.
-
-I then refactored the code to improve readability and pull out specific methods into private methods, to ensure each method was a) SRP and b) DRY. I used the tests to ensure the code continued to work as expected.
-
-I also refactored in small chunks with lots of commits to ensure I could roll back on commits when necessary.
-
-Finally once the code was refactored to my satisfaction, I developed unit tests for the new feature (conjured items) and TDD'd the new feature into existince.
-
-I also added in attr_reader feature for the items, to be able to easily see what items where availabel in the shop and improve test readability.
-
-At the time of submission:
-- no rubocop error - except GildedRose class over 30 lines.
-- all tests passed and 100% coverage
 
 ## Code Structure & Dependencies
 - Built with Ruby Version: 3.0.1
